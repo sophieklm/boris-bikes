@@ -29,4 +29,7 @@ describe DockingStation do
     expect{subject.dock(bike)}.to raise_error(RuntimeError)
   end
 
+  it 'sets capacity' do
+    expect(subject.capacity).to eq 20
+  end
 end
