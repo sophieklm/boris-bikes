@@ -12,12 +12,12 @@ describe DockingStation do
   end
 
   it 'docks a bike' do
-    expect(subject.dock(bike)).to eq bike
+    expect(subject.dock(bike)).to eq [bike]
   end
 
-  it 'returns a bike' do
+  it 'returns a bike that has been docked' do
     subject.dock(bike)
-    expect(subject.bike).to eq bike
+    expect(subject.bikes).to eq [bike]
   end
 
   it 'raises an error when no bikes' do
@@ -25,7 +25,7 @@ describe DockingStation do
   end
 
   it 'raises an error when dockingstation is full' do
-    subject.dock(bike)
+    20.times { subject.dock(bike) }
     expect{subject.dock(bike)}.to raise_error(RuntimeError)
   end
 
