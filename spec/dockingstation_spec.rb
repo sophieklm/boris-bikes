@@ -25,7 +25,7 @@ describe DockingStation do
   end
 
   it 'raises an error when dockingstation is full' do
-    20.times { subject.dock(bike) }
+    (DockingStation::DEFAULT_CAPACITY).times { subject.dock(bike) }
     expect{subject.dock(bike)}.to raise_error(RuntimeError)
   end
 
