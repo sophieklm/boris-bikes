@@ -28,11 +28,16 @@ describe DockingStation do
       expect(bike).to be_instance_of(Bike)
       expect(bike).to be_working
     end
+    it 'doesnt release a broken bike' do
+      bike.report_broken
+      subject.dock(bike)
+      expect{subject.release_bike}.to raise_error(RuntimeError)
+    end
   end
 
   describe '#initialize' do
     it 'sets capacity' do
       expect(subject.capacity).to be DockingStation::DEFAULT_CAPACITY
     end
-  end  
+  end
 end
