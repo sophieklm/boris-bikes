@@ -14,7 +14,7 @@ class DockingStation
 
   def release_bike
     raise RuntimeError, "There are no bikes" if empty?
-    @bikes.each_index {|bike, i| return bikes.slice!(i) unless bikes[i].broken?}
+    @bikes.each_with_index {|bike, i| return bikes.slice!(i) unless bikes[i].broken?}
     raise RuntimeError, "There are no working bikes"
   end
 
