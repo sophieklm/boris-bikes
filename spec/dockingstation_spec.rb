@@ -27,7 +27,7 @@ describe DockingStation do
     end
     it 'releases a bike that works' do
       allow(bike).to receive(:broken?).and_return(false)
-      subject.dock bike
+      subject.dock(bike)
       bike = subject.release_bike
       expect(bike).not_to be_broken
     end
