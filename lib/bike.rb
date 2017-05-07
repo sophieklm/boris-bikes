@@ -1,4 +1,5 @@
 class Bike
+
   def working?
     return true unless @broken
     false
@@ -11,4 +12,9 @@ class Bike
   def broken?
     @broken
   end
+
+  def fix
+    @broken = false
+  end
+
 end
