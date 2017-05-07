@@ -1,7 +1,10 @@
-require 'dockingstation'
 require 'bike'
+require 'dockingstation'
+require 'support/shared_examples_for_bike_container'
 
 describe DockingStation do
+
+  it_behaves_like BikeContainer
 
   describe '#dock' do
     let(:bike) {double :bike}
@@ -11,7 +14,7 @@ describe DockingStation do
     end
     it 'returns a bike that has been docked' do
       subject.dock(bike)
-      expect(subject.bikes).to eq [bike]
+      expect(subject.remove_bike).to eq bike
     end
     it 'raises an error when dockingstation is full' do
       (subject.capacity).times { subject.dock(bike) }
@@ -36,6 +39,14 @@ describe DockingStation do
       subject.dock(bike)
       expect{subject.release_bike}.to raise_error(RuntimeError)
     end
+    it 'releases a working bike if another bike is broken' do
+      allow(bike).to receive(:broken?).and_return(true)
+      subject.dock(bike)
+      subject.dock(Bike.new)
+      bike = subject.release_bike
+      expect(bike).not_to be_broken
+    end
+
   end
 
   describe '#initialize' do
